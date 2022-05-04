@@ -13,9 +13,7 @@ class GalleryAdapters(private val mList: List<CategoryUi>) :
         ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mList[position])
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(mList[position])
 
     override fun getItemCount() = mList.size
 
