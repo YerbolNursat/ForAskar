@@ -8,7 +8,7 @@ import com.example.myapplication.ui.gallery.items.CategoryUi
 
 class GalleryAdapters(private val mList: List<CategoryUi>) :
     RecyclerView.Adapter<GalleryAdapters.ViewHolder>() {
-    
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )

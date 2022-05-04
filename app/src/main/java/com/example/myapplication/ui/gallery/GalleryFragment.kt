@@ -14,6 +14,7 @@ import com.example.myapplication.ui.afterCategory.AfterCategoryFragment
 import com.example.myapplication.ui.afterCategory.AfterCategoryFragmentArgs
 import com.example.myapplication.ui.gallery.adapters.GalleryAdapters
 import com.example.myapplication.ui.gallery.items.CategoryUi
+import com.example.myapplication.utils.event.EventObserver
 
 class GalleryFragment : Fragment() {
 
@@ -34,7 +35,7 @@ class GalleryFragment : Fragment() {
 
         return binding.root
     }
-
+    // todo Можешь добавить либу swipeRefreshLayout
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         galleryViewModel.getCategoryUi()
@@ -42,7 +43,7 @@ class GalleryFragment : Fragment() {
 
     private fun initObservers() {
         galleryViewModel.data.observe(viewLifecycleOwner, Observer(::onDataChanged))
-        galleryViewModel.toNextPage.observe(viewLifecycleOwner, Observer(::toNextPage))
+        galleryViewModel.toNextPage.observe(viewLifecycleOwner, EventObserver(::toNextPage))
     }
 
     private fun onDataChanged(data: List<CategoryUi>) {
@@ -51,7 +52,10 @@ class GalleryFragment : Fragment() {
     }
 
     private fun toNextPage(id: Int) {
-        findNavController().navigate(R.id.action_nav_gallery_to_afterCategoryFragment,AfterCategoryFragmentArgs(id).toBundle())
+        findNavController().navigate(
+            R.id.action_nav_gallery_to_afterCategoryFragment,
+            AfterCategoryFragmentArgs(id).toBundle()
+        )
     }
 
     override fun onDestroyView() {
